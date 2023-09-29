@@ -37,7 +37,7 @@ const Edit = () => {
           href={route('orders')}
           className="text-indigo-600 hover:text-indigo-700"
         >
-          customers
+          orders
         </InertiaLink>
         <span className="mx-2 font-medium text-indigo-600">/</span>
         {customerOrder.name}
@@ -64,7 +64,7 @@ const Edit = () => {
               name="item_id"
               errors={errors.item_id}
               value={data.item_id}
-              onChange={e => handleItemChange(e.target.value)}
+              onChange={e => setData('item_id', e.target.value)}
             >
               <option value=""></option>
               {items.map((item, index) => {
