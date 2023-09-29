@@ -22,7 +22,7 @@ class CreateItemsTable extends Migration
             $table->integer('kyat')->default(0);
             $table->integer('pae')->default(0);
             $table->integer('yway')->default(0);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
