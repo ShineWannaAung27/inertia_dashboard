@@ -11,7 +11,7 @@ class Customer extends Model
     use HasFactory, CustomerScope;
     protected $guarded = [];
     
-    public function orders()
+    public function order()
     {
         return $this->hasMany(Order::class);
     }

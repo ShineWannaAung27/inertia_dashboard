@@ -72,9 +72,9 @@ Route::put('customers/{customer}')->name('customers.update')->uses('CustomerCont
 Route::get('orders')->name('orders')->uses('CustomerOrderController@index')->middleware('remember', 'auth');
 Route::get('orders/create')->name('orders.create')->uses('CustomerOrderController@create')->middleware('remember', 'auth');
 Route::post('orders')->name('orders.store')->uses('CustomerOrderController@store')->middleware('remember', 'auth');
-Route::get('orders/{order}/edit')->name('orders.edit')->uses('CustomerOrderController@edit')->middleware('remember', 'auth');
-Route::delete('orders/{order}')->name('orders.destroy')->uses('CustomerOrderController@destroy')->middleware('auth');
-Route::put('orders/{order}')->name('orders.update')->uses('CustomerOrderController@update')->middleware('auth');
+Route::get('orders/{customer_order}/edit')->name('orders.edit')->uses('CustomerOrderController@edit')->middleware('remember', 'auth');
+Route::delete('orders/{customer_order}')->name('orders.destroy')->uses('CustomerOrderController@destroy')->middleware('auth');
+Route::put('orders/{customer_order}')->name('orders.update')->uses('CustomerOrderController@update')->middleware('auth');
 
 
 // Reports

@@ -38,49 +38,59 @@ const Index = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map(({ id, name, phone, address }) => {
-              return (
-                <tr
-                  key={id}
-                  className="hover:bg-gray-100 focus-within:bg-gray-100"
-                >
-                  <TableColumn
-                    columnName={item_id}
-                    routeName={'orders.edit'}
-                    id={id}
-                  />
-                  <TableColumn
-                    columnName={customer_id}
-                    routeName={'orders.edit'}
-                    id={id}
-                  />
-                  <TableColumn
-                    columnName={confirm_status}
-                    routeName={'orders.edit'}
-                    id={id}
-                  />
-                  <TableColumn
-                    columnName={confirm_price}
-                    routeName={'orders.edit'}
-                    id={id}
-                  />
-                  <TableColumn
-                    columnName={org_price}
-                    routeName={'orders.edit'}
-                    id={id}
-                  />
-                  <TableColumn
-                    columnName={remark}
-                    routeName={'orders.edit'}
-                    id={id}
-                  />
-                </tr>
-              );
-            })}
+            {data.map(
+              ({
+                id,
+                item_id,
+                customer_id,
+                confirm_status,
+                confirm_price,
+                org_price,
+                remark
+              }) => {
+                return (
+                  <tr
+                    key={id}
+                    className="hover:bg-gray-100 focus-within:bg-gray-100"
+                  >
+                    <TableColumn
+                      columnName={item_id}
+                      routeName={'orders.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnName={customer_id}
+                      routeName={'orders.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnName={confirm_status}
+                      routeName={'orders.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnName={confirm_price}
+                      routeName={'orders.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnName={org_price}
+                      routeName={'orders.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnName={remark}
+                      routeName={'orders.edit'}
+                      id={id}
+                    />
+                  </tr>
+                );
+              }
+            )}
             {data.length === 0 && (
               <tr>
                 <td className="px-6 py-4 border-t" colSpan="4">
-                  No Items found.
+                  No Orders found.
                 </td>
               </tr>
             )}

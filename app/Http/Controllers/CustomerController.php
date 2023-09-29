@@ -37,7 +37,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Customer/Create');
+        return Inertia::render('Order/Create');
     }
 
     /**
@@ -94,6 +94,7 @@ class CustomerController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address,
+
         ]);
         return Redirect::route('customers')->with('success');
     }
@@ -106,6 +107,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return Redirect::route('customers')->with('success');
     }
 }

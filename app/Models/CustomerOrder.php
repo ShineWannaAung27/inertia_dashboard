@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerOrder extends Model
 {
     use HasFactory, OrderScope;
+    protected $guarded = [];
 
     public function customer()
     {
