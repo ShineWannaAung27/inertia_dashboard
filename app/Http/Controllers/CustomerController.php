@@ -37,7 +37,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Order/Create');
+        return Inertia::render('Customer/Create');
     }
 
     /**
