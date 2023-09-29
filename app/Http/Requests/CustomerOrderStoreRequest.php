@@ -25,10 +25,10 @@ class CustomerOrderStoreRequest extends FormRequest
     {
         return [
             'item_id' => ['required',],
-            'customer_id' => ['required',],
+            'customer_id' => ['required'],
             'confirm_status' => ['required',],
-            'confirm_price' => ['required',],
-            'org_price' => ['required',],
+            'confirm_price' => ['required','min:0'],
+            'org_price' => ['required','min:0'],
             'remark' => ['nullable',],
         ];
     }

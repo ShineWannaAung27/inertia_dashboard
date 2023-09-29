@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\ItemCollection;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemStoreRequest;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Resources\ItemCollection;
 use App\Models\Item;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Request;
 
 class ItemController extends Controller
 {
@@ -21,13 +20,7 @@ class ItemController extends Controller
         $item = Item::filter(Request::only('search'))
             ->paginate()
             ->appends(Request::all());
-
-        return Inertia::render('Item/Index', [
-            'filters' => Request::all('search', 'trashed'),
-            'items' => new ItemCollection($item),
-        ]);
-
-
+        return new ItemCollection($item);
     }
 
     /**
@@ -37,7 +30,6 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Item/Create');
     }
 
     /**
@@ -59,9 +51,9 @@ class ItemController extends Controller
             'image' => $request->image,
         ]);
 
-        return Redirect::route('items')->with('success');
-
-        
+        return response()->json([
+            'message' => 'Item Added'
+        ], 201);
     }
 
     /**
@@ -72,7 +64,10 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        
+        return response()->json([
+            'message' => 'Item Detail',
+            "data" => $item
+        ], 201);
     }
 
     /**
@@ -83,9 +78,6 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        return Inertia::render('Item/Edit', [
-            'item' => $item,
-        ]);
     }
 
     /**
@@ -97,6 +89,7 @@ class ItemController extends Controller
      */
     public function update(ItemStoreRequest $request, Item $item)
     {
+        dd($item);
         $item->update([
             'name' => $request->name,
             'itemcode' => $request->itemcode,
@@ -108,12 +101,9 @@ class ItemController extends Controller
             'image' => $request->image
         ]);
 
-
-        return Redirect::route('items')->with('success');
-
-        // return response()->json([
-        //     'message'=>'Item Updated'
-        // ],201);
+        return response()->json([
+            'message' => 'Item Updated'
+        ], 201);
     }
 
     /**
@@ -125,6 +115,9 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         $item->delete();
-        return Redirect::route('items')->with('success');
+        return response()->json([
+            "success" => true,
+            "message" => "Item deleted successfully.",
+        ]);
     }
 }

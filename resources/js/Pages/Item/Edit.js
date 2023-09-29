@@ -72,6 +72,7 @@ const Edit = () => {
               label="Price"
               name="price"
               type="number"
+              min="0"
               errors={errors.price}
               value={data.price}
               onChange={e => setData('price', e.target.value)}
@@ -81,6 +82,7 @@ const Edit = () => {
               label="Kyat"
               name="kyat"
               type="number"
+              min="0"
               errors={errors.kyat}
               value={data.kyat}
               onChange={e => setData('kyat', e.target.value)}
@@ -90,6 +92,7 @@ const Edit = () => {
               label="Pae"
               name="pae"
               type="number"
+              min="0"
               errors={errors.pae}
               value={data.pae}
               onChange={e => setData('pae', e.target.value)}
@@ -99,6 +102,7 @@ const Edit = () => {
               label="Yway"
               name="yway"
               type="number"
+              min="0"
               errors={errors.yway}
               value={data.yway}
               onChange={e => setData('yway', e.target.value)}

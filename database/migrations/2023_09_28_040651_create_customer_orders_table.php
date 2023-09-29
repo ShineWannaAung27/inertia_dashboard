@@ -15,8 +15,8 @@ class CreateCustomerOrdersTable extends Migration
     {
         Schema::create('customer_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("item_id")->constrained('items');
-            $table->foreignId("customer_id")->constrained('customers');
+            $table->foreignId("item_id")->constrained('items')->onDelete('cascade');;
+            $table->foreignId("customer_id")->constrained('customers')->onDelete('cascade');;
             $table->boolean("confirm_status")->default(false);
             $table->integer("confirm_price")->default(0);
             $table->integer("org_price")->default(0);

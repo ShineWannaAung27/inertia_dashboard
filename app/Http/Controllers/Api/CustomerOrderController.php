@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\ItemCollection;
-use App\Http\Requests\ItemStoreRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerOrderStoreRequest;
+use App\Http\Resources\OrderCollection;
+use App\Models\CustomerOrder;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Redirect;
-use App\Models\Item;
-use Inertia\Inertia;
 
-class ItemController extends Controller
+class CustomerOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +17,10 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $item = Item::filter(Request::only('search'))
+        $customerOrder = CustomerOrder::filter(Request::only('search'))
             ->paginate()
             ->appends(Request::all());
-
-        return Inertia::render('Item/Index', [
-            'filters' => Request::all('search', 'trashed'),
-            'items' => new ItemCollection($item),
-        ]);
-
+        return new OrderCollection($customerOrder);
 
     }
 
@@ -37,7 +31,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Item/Create');
+        
     }
 
     /**
@@ -46,9 +40,9 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemStoreRequest $request)
+    public function store(CustomerOrderStoreRequest $request)
     {
-        Item::create([
+        CustomerOrder::create([
             'name' => $request->name,
             'itemcode' => $request->itemcode,
             'description' => $request->description,
@@ -59,9 +53,9 @@ class ItemController extends Controller
             'image' => $request->image,
         ]);
 
-        return Redirect::route('items')->with('success');
-
-        
+        return response()->json([
+            'message'=>'Customer Order Added'
+        ],201);
     }
 
     /**
@@ -70,9 +64,12 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show(CustomerOrder $customerOrder)
     {
-        
+        return response()->json([
+            'message'=>'Customer Order Detail',
+            "data" => $customerOrder
+        ],201);
     }
 
     /**
@@ -81,11 +78,9 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit(CustomerOrder $customerOrder)
     {
-        return Inertia::render('Item/Edit', [
-            'item' => $item,
-        ]);
+        
     }
 
     /**
@@ -95,9 +90,9 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemStoreRequest $request, Item $item)
+    public function update(CustomerOrderStoreRequest $request, CustomerOrder $customerOrder)
     {
-        $item->update([
+        $customerOrder->update([
             'name' => $request->name,
             'itemcode' => $request->itemcode,
             'description' => $request->description,
@@ -108,12 +103,10 @@ class ItemController extends Controller
             'image' => $request->image
         ]);
 
+        return response()->json([
+            'message'=>'Customer Order Updated'
+        ],201);
 
-        return Redirect::route('items')->with('success');
-
-        // return response()->json([
-        //     'message'=>'Item Updated'
-        // ],201);
     }
 
     /**
@@ -122,9 +115,13 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(CustomerOrder $customerOrder)
     {
-        $item->delete();
-        return Redirect::route('items')->with('success');
+        $customerOrder->delete();
+        return response()->json([
+            "success" => true,
+            "message" => "Item Order deleted successfully.",
+        ]);
+
     }
 }

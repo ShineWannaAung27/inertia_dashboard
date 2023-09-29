@@ -16,7 +16,7 @@ const Create = () => {
   });
 
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefaeult();
     post(route('customers.store'));
   }
 

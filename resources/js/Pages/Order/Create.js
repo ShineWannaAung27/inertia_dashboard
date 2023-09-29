@@ -73,6 +73,7 @@ const handleItemChange =(value)=>{
               label="Confirm price"
               name="confirm_price"
               type="number"
+              min="0"
               errors={errors.confirm_price}
               value={data.confirm_price}
               onChange={e => setData('confirm_price', e.target.value)}
@@ -82,6 +83,7 @@ const handleItemChange =(value)=>{
               label="Original Price"
               name="org_price"
               type="number"
+              min="0"
               errors={errors.original_price}
               value={data.original_price}
               onChange={e => setData('org_price', e.target.value)}

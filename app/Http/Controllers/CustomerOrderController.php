@@ -73,4 +73,13 @@ class CustomerOrderController extends Controller
         $customerOrder->delete();
         return Redirect::route('orders')->with('success');
     }
+
+    public function confirmOrder(CustomerOrder $customerOrder)
+    {
+        $customerOrder->update([
+            'confirm_status' => 1,
+            
+        ]);
+        return Redirect::route('orders')->with('success');
+    }
 }

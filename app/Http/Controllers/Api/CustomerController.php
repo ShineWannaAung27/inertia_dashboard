@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\ItemCollection;
-use App\Http\Requests\ItemStoreRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerStoreRequest;
+use App\Http\Resources\CustomerCollection;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Redirect;
-use App\Models\Item;
-use Inertia\Inertia;
 
-class ItemController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +17,11 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $item = Item::filter(Request::only('search'))
+        $customer = Customer::filter(Request::only('search'))
             ->paginate()
             ->appends(Request::all());
+        return new CustomerCollection($customer);
 
-        return Inertia::render('Item/Index', [
-            'filters' => Request::all('search', 'trashed'),
-            'items' => new ItemCollection($item),
-        ]);
 
 
     }
@@ -37,7 +33,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Item/Create');
+        
     }
 
     /**
@@ -46,9 +42,9 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemStoreRequest $request)
+    public function store(CustomerStoreRequest $request)
     {
-        Item::create([
+        Customer::create([
             'name' => $request->name,
             'itemcode' => $request->itemcode,
             'description' => $request->description,
@@ -59,9 +55,9 @@ class ItemController extends Controller
             'image' => $request->image,
         ]);
 
-        return Redirect::route('items')->with('success');
-
-        
+        return response()->json([
+            'message'=>'Item Added'
+        ],201);
     }
 
     /**
@@ -70,9 +66,12 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show(Customer $customer)
     {
-        
+        return response()->json([
+            'message'=>'Item Detail',
+            "data" => $customer
+        ],201);
     }
 
     /**
@@ -81,11 +80,9 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit(Customer $customer)
     {
-        return Inertia::render('Item/Edit', [
-            'item' => $item,
-        ]);
+        
     }
 
     /**
@@ -95,9 +92,10 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemStoreRequest $request, Item $item)
+    public function update(CustomerStoreRequest $request, Customer $customer)
     {
-        $item->update([
+        dd($customer);
+        $customer->update([
             'name' => $request->name,
             'itemcode' => $request->itemcode,
             'description' => $request->description,
@@ -108,12 +106,10 @@ class ItemController extends Controller
             'image' => $request->image
         ]);
 
+        return response()->json([
+            'message'=>'Item Updated'
+        ],201);
 
-        return Redirect::route('items')->with('success');
-
-        // return response()->json([
-        //     'message'=>'Item Updated'
-        // ],201);
     }
 
     /**
@@ -122,9 +118,13 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(Customer $customer)
     {
-        $item->delete();
-        return Redirect::route('items')->with('success');
+        $customer->delete();
+        return response()->json([
+            "success" => true,
+            "message" => "Item deleted successfully.",
+        ]);
+
     }
 }

@@ -7,16 +7,16 @@ import TextInput from '@/Shared/TextInput';
 import SelectInput from '@/Shared/SelectInput';
 import TextAreaInput from '@/Shared/TextAreaInput';
 import { Helmet } from 'react-helmet';
+import DeleteButton from '@/Shared/DeleteButton';
 
 const Edit = () => {
   const { customer } = usePage().props;
-  const { data, setData, errors,put, post, processing } = useForm({
-    name:customer.name || '',
-    phone:customer.phone || '',
-    address:customer.address || '',
-    
+  const { data, setData, errors, put, post, processing } = useForm({
+    name: customer.name || '',
+    phone: customer.phone || '',
+    address: customer.address || ''
   });
-  
+
   function handleSubmit(e) {
     e.preventDefault();
     put(route('customers.update', customer));
@@ -42,8 +42,7 @@ const Edit = () => {
       </h1>
       <div className="max-w-3xl overflow-hidden bg-white rounded shadow">
         <form onSubmit={handleSubmit}>
-        <div className="flex flex-wrap p-8 -mb-8 -mr-6">
-           
+          <div className="flex flex-wrap p-8 -mb-8 -mr-6">
             <TextInput
               className="w-full pb-8 pr-6 lg:w-1/2"
               label="Name"
@@ -67,19 +66,20 @@ const Edit = () => {
               label="Address"
               name="address"
               type="text"
-              placeholder={"Address Here"}
+              placeholder={'Address Here'}
               errors={errors.address}
               value={data.address}
               onChange={e => setData('address', e.target.value)}
             />
           </div>
-          <div className="flex items-center justify-end px-8 py-4 bg-gray-100 border-t border-gray-200">
+          <div className="flex items-center px-8 py-4 bg-gray-100 border-t border-gray-200">
+            <DeleteButton onDelete={destroy}>Delete Item</DeleteButton>
             <LoadingButton
               // loading={processing}
               type="submit"
-              className="btn-indigo"
+              className="ml-auto btn-indigo"
             >
-              Update Customer
+              Update Item
             </LoadingButton>
           </div>
         </form>

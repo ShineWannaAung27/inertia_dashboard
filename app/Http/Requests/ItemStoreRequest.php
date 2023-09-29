@@ -27,10 +27,10 @@ class ItemStoreRequest extends FormRequest
             'name' => ['required', 'max:50'],
             'itemcode' => ['required', 'max:50'],
             'description' => ['required', 'max:50'],
-            'kyat' => ['nullable'],
-            'pae' => ['nullable'],
-            'yway' => ['nullable'],
-            'image' => ['nullable'],
+            'kyat' => ['nullable','min:0'],
+            'pae' => ['nullable','min:0'],
+            'yway' => ['nullable','min:0'],
+            'image' => ['nullable','min:0'],
         ];
     }
 }
