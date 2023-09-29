@@ -12,6 +12,9 @@
 */
 
 // Auth
+
+use Illuminate\Support\Facades\Route;
+
 Route::get('login')->name('login')->uses('Auth\LoginController@showLoginForm')->middleware('guest');
 Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login')->middleware('guest');
 Route::post('logout')->name('logout')->uses('Auth\LoginController@logout');
@@ -49,10 +52,33 @@ Route::put('contacts/{contact}')->name('contacts.update')->uses('ContactsControl
 Route::delete('contacts/{contact}')->name('contacts.destroy')->uses('ContactsController@destroy')->middleware('auth');
 Route::put('contacts/{contact}/restore')->name('contacts.restore')->uses('ContactsController@restore')->middleware('auth');
 
+// Item
+Route::get('items')->name('items')->uses('ItemController@index')->middleware('remember', 'auth');
+Route::get('items/create')->name('items.create')->uses('ItemController@create')->middleware('remember', 'auth');
+Route::post('items')->name('items.store')->uses('ItemController@store')->middleware('remember', 'auth');
+Route::get('items/{item}/edit')->name('items.edit')->uses('ItemController@edit')->middleware('remember', 'auth');
+Route::delete('items/{item}')->name('items.destroy')->uses('ItemController@destroy')->middleware('auth');
+Route::put('items/{item}')->name('items.update')->uses('ItemController@update')->middleware('auth');
+
+// Customer
+Route::get('customers')->name('customers')->uses('CustomerController@index')->middleware('remember', 'auth');
+Route::get('customers/create')->name('customers.create')->uses('CustomerController@create')->middleware('remember', 'auth');
+Route::post('customers')->name('customers.store')->uses('CustomerController@store')->middleware('remember', 'auth');
+Route::get('customers/{customer}/edit')->name('customers.edit')->uses('CustomerController@edit')->middleware('remember', 'auth');
+Route::delete('customers/{customer}')->name('customers.destroy')->uses('CustomerController@destroy')->middleware('auth');
+Route::put('customers/{customer}')->name('customers.update')->uses('CustomerController@update')->middleware('auth');
+
+// Order
+Route::get('orders')->name('orders')->uses('CustomerOrderController@index')->middleware('remember', 'auth');
+Route::get('orders/create')->name('orders.create')->uses('CustomerOrderController@create')->middleware('remember', 'auth');
+Route::post('orders')->name('orders.store')->uses('CustomerOrderController@store')->middleware('remember', 'auth');
+Route::get('orders/{order}/edit')->name('orders.edit')->uses('CustomerOrderController@edit')->middleware('remember', 'auth');
+Route::delete('orders/{order}')->name('orders.destroy')->uses('CustomerOrderController@destroy')->middleware('auth');
+Route::put('orders/{order}')->name('orders.update')->uses('CustomerOrderController@update')->middleware('auth');
+
+
 // Reports
 Route::get('reports')->name('reports')->uses('ReportsController')->middleware('auth');
 
 // 500 error
-Route::get('500', function () {
-    echo $fail;
-});
+
