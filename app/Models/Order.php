@@ -10,15 +10,7 @@ class Order extends Model
 {
     use HasFactory, OrderScope;
 
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class);
-    }
-
-    public function items()
-    {
-        return $this->hasMany(Customer::class);
-    }
+   
 }
 
 
