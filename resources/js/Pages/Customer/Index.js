@@ -12,6 +12,7 @@ const Index = () => {
     data,
     meta: { links }
   } = customers;
+  console.log(data);
   return (
     <div>
       <h1 className="mb-8 text-3xl font-bold">Customers</h1>
@@ -42,17 +43,17 @@ const Index = () => {
                   className="hover:bg-gray-100 focus-within:bg-gray-100"
                 >
                   <TableColumn
-                    columnName={name}
+                      columnValue={name}
+                      routeName={'customers.edit'}
+                      id={id}
+                    />
+                  <TableColumn
+                    columnValue={phone}
                     routeName={'customers.edit'}
                     id={id}
                   />
                   <TableColumn
-                    columnName={phone}
-                    routeName={'customers.edit'}
-                    id={id}
-                  />
-                  <TableColumn
-                    columnName={address}
+                    columnValue={address}
                     routeName={'customers.edit'}
                     id={id}
                   />

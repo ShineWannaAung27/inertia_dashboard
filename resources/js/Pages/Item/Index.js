@@ -40,29 +40,48 @@ const Index = () => {
           </thead>
           <tbody>
             {data.map(
-              ({
-                id,
-                name,
-                itemcode,
-                description,
-                kyat,
-                pae,
-                yway,
-                image
-              }) => {
+              ({ id, name, itemcode, description, kyat, pae, yway, image }) => {
                 return (
                   <tr
                     key={id}
                     className="hover:bg-gray-100 focus-within:bg-gray-100"
                   >
-                    <TableColumn columnName={name} routeName={'items.edit'} id={id}/>
-                    <TableColumn columnName={itemcode} routeName={'items.edit'} id={id}/>
-                    <TableColumn columnName={description} routeName={'items.edit'} id={id}/>
-                    <TableColumn columnName={kyat} routeName={'items.edit'} id={id}/>
-                    <TableColumn columnName={pae} routeName={'items.edit'} id={id}/>
-                    <TableColumn columnName={yway} routeName={'items.edit'} id={id}/>
-                    <TableColumn columnName={image} routeName={'items.edit'} id={id}/>
-                    
+                    <TableColumn
+                      columnValue={name}
+                      routeName={'items.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnValue={itemcode}
+                      routeName={'items.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnValue={description}
+                      routeName={'items.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnValue={kyat}
+                      routeName={'items.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnValue={pae}
+                      routeName={'items.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnValue={yway}
+                      routeName={'items.edit'}
+                      id={id}
+                    />
+                    <TableColumn
+                      columnValue={image}
+                      type="image"
+                      routeName={'items.edit'}
+                      id={id}
+                    />
                   </tr>
                 );
               }

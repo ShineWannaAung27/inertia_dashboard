@@ -1,25 +1,21 @@
 import React from 'react';
-import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink, useForm } from '@inertiajs/inertia-react';
 import Layout from '@/Shared/Layout';
 import LoadingButton from '@/Shared/LoadingButton';
 import TextInput from '@/Shared/TextInput';
-import SelectInput from '@/Shared/SelectInput';
 import TextAreaInput from '@/Shared/TextAreaInput';
 
 const Create = () => {
   const { data, setData, errors, post, processing } = useForm({
     name: '',
     phone: '',
-    address: '',
-   
+    address: ''
   });
 
   function handleSubmit(e) {
-    e.preventDefaeult();
+    e.preventDefault();
     post(route('customers.store'));
   }
-
   return (
     <div>
       <h1 className="mb-8 text-3xl font-bold">
@@ -45,7 +41,7 @@ const Create = () => {
             <TextInput
               className="w-full pb-8 pr-6 lg:w-1/2"
               label="Phone"
-              name="Phone"
+              name="phone"
               type="phone"
               errors={errors.phone}
               value={data.phone}
@@ -68,7 +64,7 @@ const Create = () => {
               type="submit"
               className="btn-indigo"
             >
-              Create Customer
+              Create Item
             </LoadingButton>
           </div>
         </form>

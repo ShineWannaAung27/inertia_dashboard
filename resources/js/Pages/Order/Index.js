@@ -54,32 +54,32 @@ const Index = () => {
                     className="hover:bg-gray-100 focus-within:bg-gray-100"
                   >
                     <TableColumn
-                      columnName={item_id}
+                      columnValue={item_id}
                       routeName={'orders.edit'}
                       id={id}
                     />
                     <TableColumn
-                      columnName={customer_id}
+                      columnValue={customer_id}
                       routeName={'orders.edit'}
                       id={id}
                     />
                     <TableColumn
-                      columnName={confirm_status}
+                      columnValue={confirm_status}
                       routeName={'orders.edit'}
                       id={id}
                     />
                     <TableColumn
-                      columnName={confirm_price}
+                      columnValue={confirm_price}
                       routeName={'orders.edit'}
                       id={id}
                     />
                     <TableColumn
-                      columnName={org_price}
+                      columnValue={org_price}
                       routeName={'orders.edit'}
                       id={id}
                     />
                     <TableColumn
-                      columnName={remark}
+                      columnValue={remark}
                       routeName={'orders.edit'}
                       id={id}
                     />

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomerStoreRequest;
 use Inertia\Inertia;
 use App\Models\Customer;
-use App\Http\Resources\ItemCollection;
-use App\Http\Requests\ItemStoreRequest;
 use App\Http\Resources\CustomerCollection;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -20,13 +18,13 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $item = Customer::filter(Request::only('search'))
-            ->paginate()
-            ->appends(Request::all());
+        $customer = Customer::filter(Request::only('search'))
+        ->paginate()
+        ->appends(Request::all());
 
         return Inertia::render('Customer/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'customers' => new CustomerCollection($item),
+            'customers' => new CustomerCollection($customer),
         ]);
     }
 
@@ -52,7 +50,6 @@ class CustomerController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address,
-
         ]);
         return Redirect::route('customers')->with('success');
     }
